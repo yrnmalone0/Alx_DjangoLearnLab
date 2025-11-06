@@ -2,11 +2,6 @@
 To update the title attribute of a book instance in Django, you can use the Django shell or create a view to handle the update of book instances. Below are the command and output from Django shell in this module.
 
 **Python Command:**
-```
-from bookshelf.models import Book
-
-```
-
 **__Get the book instance by its primary key (id)__**
 ```
 update_book = Book.objects.get(pk=1)
