@@ -3,13 +3,12 @@ To retrieve and display all attributes of a book instance in Django, you can use
 
 **Python Command:**
 ```
-Book.objects.all()
+Book.objects.get()
 
 ```
-
 
 **Expected Output:**
 ```
-<QuerySet [<Book: 1984>]>
+<Book: 1984>
 
 ```
