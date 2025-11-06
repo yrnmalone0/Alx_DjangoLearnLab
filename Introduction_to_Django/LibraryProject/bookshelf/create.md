@@ -3,8 +3,7 @@ To create a book instance in Django, you can use the Django shell or create a vi
 
 **Python Command:**
 ```
-create_book = Book(title = "1984", author = "George Orwell", publication_year = "1949")
-create_book.save()
+Book.objects.create(title = "1984", author = "George Orwell", publication_year = "1949")
 
 ```
 
@@ -13,7 +12,7 @@ In this case, there is no direct output from the save() method, but the book ins
 
 ```
 create_book.id
-1
+
 ```
 
 
