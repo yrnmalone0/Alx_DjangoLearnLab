@@ -1,4 +1,4 @@
-# UPDATING TITLE ATTRIBUTE OF THE BOOK
+# Updating Title Attribute of the Book
 To update the title attribute of a book instance in Django, you can use the Django shell or create a view to handle the update of book instances. Below are the command and output from Django shell in this module.
 
 **Python Command:**
