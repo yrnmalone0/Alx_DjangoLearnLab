@@ -11,7 +11,7 @@ Book.objects.create(title = "1984", author = "George Orwell", publication_year =
 In this case, there is no direct output from the save() method, but the book instance is created and saved to the database. Also, you can verify to see it **id** assigned to the instance.
 
 ```
-create_book.id
+<Book: 1984>
 
 ```
 
