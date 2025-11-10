@@ -1,10 +1,10 @@
-from .models import Book, Library
+from .models import Book, Library, Librarian
 # Query all books by a specific author.
 Book.objects.filter(authors_name = "John Doe")
 
 # List all books in a library.
-library = Library.objects.get(name="Central Library")
-library.books.all()
+Library.objects.get(name="Central Library")
+
 
 # Retrieve the librarian for a library.
-librarian = library.name
+librarian = Library.objects.get(name="Central Library").librarian
