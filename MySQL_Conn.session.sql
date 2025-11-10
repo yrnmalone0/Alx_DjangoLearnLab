@@ -1,0 +1,1 @@
+SELECT * FROM Alx_Test_DB.bookshelf_book;
