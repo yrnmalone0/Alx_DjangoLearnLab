@@ -8,4 +8,4 @@ Library.objects.get(name=library_name).books.all()
 
 
 # Retrieve the librarian for a library.
-librarian = Library.objects.get(name="Central Library").librarian
+Librarian.objects.get(library="")
