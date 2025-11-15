@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from . models import Book
 from .models import Library
@@ -33,10 +33,19 @@ class LibraryDetailView(DetailView):
 # Utilize Django’s built-in views and forms for handling user authentication. You will need to create views for user login, logout, and registration.
 
 # Registration view
-class register(CreateView):
-    form_class = UserCreationForm
-    success_url = reverse_lazy('login')
-    template_name = 'relationship_app/register.html'
+
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()  # Save the new user
+            login(request, user)  # Log the user in automatically after registration
+            return redirect('home')  # Redirect to a homepage or a specific page after registration
+    else:
+        form = UserCreationForm()
+
+    return render(request, 'registration/register.html', {'form': form})
 
 
 # Login and logout views can be handled using Django's built-in views, so no need to redefine them here.
