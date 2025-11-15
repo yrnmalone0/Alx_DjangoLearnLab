@@ -22,4 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('books/', views.book_list, name='book-list'),
     path('library/', views.LibraryDetailView.as_view(), name='list_books'),
+    path('register/', views.SignUpView.as_view(), name='register'),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.LogoutView.as_view(), name='logout'),
 ]
