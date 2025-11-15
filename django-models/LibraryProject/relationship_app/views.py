@@ -5,7 +5,7 @@ from .models import Library
 from LibraryProject import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.forms import Login
-from django.contrib.auth import Login
+from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
