@@ -3,7 +3,8 @@ from django.views.generic.detail import DetailView
 from . models import Book
 from .models import Library
 from LibraryProject import views
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.forms import Login
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 
@@ -27,11 +28,6 @@ class LibraryDetailView(DetailView):
         return context
         
 
-# class SignUpView(CreateView):
-#     form_class = UserCreationForm
-#     success_url = reverse_lazy('login')
-#     template_name = 'relationship_app/register.html'
-
 # Utilize Django’s built-in views and forms for handling user authentication. You will need to create views for user login, logout, and registration.
 
 # Registration view
@@ -48,5 +44,5 @@ class LoginView(views.LoginView):
 class LogoutView(views.LogoutView):
     template_name = 'relationship_app/logged_out.html'
 
-    
+
 
