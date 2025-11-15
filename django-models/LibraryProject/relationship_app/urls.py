@@ -10,6 +10,11 @@ A URL for the ‘Admin’ view.
 A URL for the ‘Librarian’ view.
 A URL for the ‘Member’ view."""
 
+"""
+Create distinct paths for adding, editing, and deleting books.
+Link each path to its respective view with the appropriate permissions.
+"""
+
 urlpatterns = [
     path('books/', views.book_list, name='book-list'),
     path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library-detail'),
@@ -19,5 +24,7 @@ urlpatterns = [
     path('admin-view/', views.admin_view, name='admin-view'),
     path('librarian-view/', views.librarian_view, name='librarian-view'),
     path('member-view/', views.member_view, name='member-view'),
-    
+    path('book/add/', views.add_book, name='add-book'),
+    path('book/<int:pk>/edit/', views.edit_book, name='edit-book'),
+    path('book/<int:pk>/delete/', views.delete_book, name='delete-book'),
 ]

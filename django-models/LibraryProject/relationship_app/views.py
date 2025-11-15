@@ -12,6 +12,7 @@ from django.views.generic import CreateView
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import permission_required
 
 # function-based view that lists all books stored in db
 def book_list(request):
@@ -99,4 +100,27 @@ def create_user_profile(sender, instance, created, **kwargs):
     """Signal to create a UserProfile whenever a new User is created."""
     if created:
         UserProfile.objects.create(user=instance)
-  
+
+
+"""Update Views to Enforce Permissions
+Adjust your views to check if a user has the necessary permissions before allowing them to perform create, update, or delete operations.
+
+Views to Modify:
+Use Django’s permission_required decorator to secure views that add, edit, or delete books.
+For each view, apply the corresponding permission."""
+
+
+@permission_required('relationship_app.can_add_book', raise_exception=True)
+def add_book(request):
+    # Logic to add a book
+    pass
+      
+@permission_required('relationship_app.can_change_book', raise_exception=True)
+def edit_book(request, book_id):
+    # Logic to edit a book
+    pass    
+
+@permission_required('relationship_app.can_delete_book', raise_exception=True)
+def delete_book(request, book_id):
+    # Logic to delete a book
+    pass

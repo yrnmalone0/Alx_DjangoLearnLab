@@ -16,6 +16,19 @@ class Book(models.Model):
     def __str__(self):
         return self.title
     
+    """Extend the Book Model with Custom Permissions
+Add custom permissions to the Book model to specify who can add, edit, or delete the entries.
+
+Model Changes Required:
+Inside the Book model, define a nested Meta class.
+Within this Meta class, specify a permissions tuple that includes permissions like can_add_book, can_change_book, and can_delete_book."""
+    class Meta:
+        permissions = [
+            ("can_add_book", "Can add book"),
+            ("can_change_book", "Can change book"),
+            ("can_delete_book", "Can delete book"),
+        ]
+    
 
 class Library(models.Model):
     name = models.CharField(max_length=250)
@@ -52,5 +65,4 @@ class UserProfile(models.Model):
     def __str__(self):
         return f"{self.user.username} - {self.role}"
 
-#Automatic Creation: Use Django signals to automatically create a UserProfile when a new user is registered.
 
