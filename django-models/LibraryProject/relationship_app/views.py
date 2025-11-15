@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import DetailView
-from . models import Book
+from . models import Book, Library
 from LibraryProject import views
 
 # function-based view that lists all books stored in db
@@ -11,13 +11,14 @@ def book_list(request):
     return render(request, 'relationship_app/list_books.html', context)
 
 # class-based view that displays details for a specific library, listing all books 
-class BookDetailView(DetailView):
-    model = Book
-    template_name = 'books/library_detail.html'
+class LibraryDetailView(DetailView):
+    model = Library
+    template_name = 'relationship_app/library_detail.html'
 
     def get_context_data(self, **kwargs):
-        """Injects additional context data specific to the book."""
+        """Injects additional context data specific to the library."""
         context = super().get_context_data(**kwargs)  # Get default context data
-        book = self.get_object()  # Retrieve the current book instance
-        context['authors'] = book.authors.all()  # Add authors related to the book
+        library = self.get_object()  # Retrieve the current library instance
+        context['books'] = library.books.all()  # Add books related to the library
         return context
+        
