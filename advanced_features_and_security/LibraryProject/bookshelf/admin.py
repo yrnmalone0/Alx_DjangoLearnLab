@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Book
+from .models import Book, CustomUser
 from ..relationship_app.models import UserProfile
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
@@ -38,8 +38,8 @@ class CustomUserAdmin(UserAdmin):
             return []
         return super().get_inline_instances(request, obj)
 
-admin.site.unregister(User)
-admin.site.register(User, CustomUserAdmin)
+admin.site.unregister(CustomUser)
+admin.site.register(CustomUser, CustomUserAdmin)
 
 admin.site.register(Book, BookAdmin)
 
