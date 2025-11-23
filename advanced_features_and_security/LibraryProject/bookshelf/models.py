@@ -56,3 +56,4 @@ class Meta:
         ("can_edit", "Can edit user"),
         ("can_delete", "Can delete user"),
     ]
+
