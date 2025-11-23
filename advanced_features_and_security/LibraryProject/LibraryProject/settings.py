@@ -29,6 +29,21 @@ ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
+# Enable the XSS filter in the browser
+SECURE_BROWSER_XSS_FILTER = True
+
+# This setting restricts your site from being embedded in an iframe (prevents clickjacking)
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevent content-type sniffing, ensuring that the browser doesn’t change the content type
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Ensure CSRF cookie is only sent over HTTPS connections
+CSRF_COOKIE_SECURE = True
+
+# Ensure session cookies are only sent over HTTPS connections
+SESSION_COOKIE_SECURE = True
+
 # Application definition
 
 INSTALLED_APPS = [
