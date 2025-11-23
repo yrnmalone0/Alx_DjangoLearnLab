@@ -93,6 +93,7 @@ from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponseForbidden
 from .models import Book
+from .forms import ExampleForm
 
 # ----------------------------------------------------
 # GROUP SETUP
