@@ -1,4 +1,3 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
@@ -69,10 +68,6 @@ class UserProfile(models.Model):
         return f"{self.user.username} - {self.role}"
 
 
-# Create a custom user model by extending AbstractUser,
-# adding custom fields (date_of_birth: A date field, profile_photo: An image field)
-class CustomUser(AbstractUser):
-    date_of_birth = models.DateField(null=True, blank=True)
-    profile_photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True)
+
 
 
