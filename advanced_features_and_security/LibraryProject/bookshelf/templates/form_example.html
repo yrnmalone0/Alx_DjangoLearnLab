@@ -1,0 +1,9 @@
+<!--Ensure that all your forms use CSRF tokens to protect against CSRF attacks. This involves modifying form templates to include {% csrf_token %}.-->
+
+<!--Template Modifications:-->
+<!--Update form templates to explicitly include the CSRF token tag if not already present.-->
+<form method="post" action="{% url 'submit_form' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
