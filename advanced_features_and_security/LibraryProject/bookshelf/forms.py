@@ -7,7 +7,8 @@ from .models import Book, CustomUser
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.utils.safestring import mark_safe
 from django.middleware.csrf import get_token
-class BookForm(forms.ModelForm):
+
+class ExampleForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = ['title', 'author', 'publication_year']
