@@ -46,3 +46,13 @@ class CustomUserManager(BaseUserManager):
             raise ValueError('Superuser must have is_superuser=True.')
 
         return self.create_user(username, email, password, **extra_fields)
+
+
+#Create permissions such as can_view, can_create, can_edit, and can_delete
+class Meta:
+    permissions = [
+        ("can_view", "Can view user"),
+        ("can_create", "Can create user"),
+        ("can_edit", "Can edit user"),
+        ("can_delete", "Can delete user"),
+    ]
