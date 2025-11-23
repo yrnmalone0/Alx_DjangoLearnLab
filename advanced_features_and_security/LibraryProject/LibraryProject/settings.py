@@ -59,6 +59,23 @@ SECURE_HSTS_PRELOAD = True
 # Prevent content type sniffing
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
+# SECURITY SETTINGS
+
+# Enforce secure cookies (only transmitted over HTTPS)
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# HTTP Headers to secure your site
+# Prevent your site from being embedded in an iframe (clickjacking protection)
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevent MIME sniffing of files
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable the browser's XSS filter to protect against XSS attacks
+SECURE_BROWSER_XSS_FILTER = True
+
+
 # Application definition
 
 INSTALLED_APPS = [
