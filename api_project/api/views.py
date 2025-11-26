@@ -3,6 +3,6 @@ from rest_framework import viewsets
 from .serializers import BookSerializer
 from .models import Book
 
-class BookList(viewsets.ModelViewSet):
+class BookList(viewsets.generics.ListAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
