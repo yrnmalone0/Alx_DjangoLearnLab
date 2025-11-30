@@ -23,7 +23,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     def get_books(self, obj):
         books = obj.books.all()
-        return BookSerializer(books, many=True).data
+        return BookSerializer(books, many=True, read_only=True).data
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
