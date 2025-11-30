@@ -13,6 +13,7 @@ from rest_framework import serializers
 from .models import Author, Book
 from datetime import datetime
 
+#api/serializers.py doesn't contain: ["(many=True, read_only=True)"]
 
 class AuthorSerializer(serializers.ModelSerializer):
     books = serializers.SerializerMethodField()
@@ -23,7 +24,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
     def get_books(self, obj):
         books = obj.books.all()
-        return BookSerializer(books, many=True, read_only=True).data
+        return BookSerializer(books, many=True, read_only=True)
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
