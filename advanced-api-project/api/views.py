@@ -65,6 +65,7 @@ Use DRF’s DjangoFilterBackend or similar tools to set up comprehensive filteri
 """
 
 from rest_framework import filters
+from django_filters import rest_framework
 class ListView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
