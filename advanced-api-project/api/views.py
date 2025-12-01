@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .models import Book
 from .serializers import BookSerializer
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 """
 Implement a set of generic views for the Book model to handle CRUD operations. This includes:
@@ -78,8 +79,9 @@ Apply Django REST Framework’s permission classes to protect API endpoints base
 For example, restrict CreateView, UpdateView, and DeleteView to authenticated users only, 
 while allowing read-only access to unauthenticated users for ListView and DetailView.
 """
-
 from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+
 class ListView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
