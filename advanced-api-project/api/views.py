@@ -4,6 +4,8 @@ from .models import Book
 from .serializers import BookSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework import permissions
+from rest_framework import filters
+from django_filters import rest_framework
 
 """
 Implement a set of generic views for the Book model to handle CRUD operations. This includes:
@@ -25,47 +27,13 @@ For example, restrict CreateView, UpdateView, and DeleteView to authenticated us
 while allowing read-only access to unauthenticated users for ListView and DetailView.
 """
 
-# class ListView(generics.ListCreateAPIView):
-#     queryset = Book.objects.all()
-#     serializer_class = BookSerializer
-#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-#
-#
-# class DetailView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Book.objects.all()
-#     serializer_class = BookSerializer
-#     lookup_field = 'id'
-#     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
-#
-#
-# class CreateView(generics.CreateAPIView):
-#     queryset = Book.objects.all()
-#     serializer_class = BookSerializer
-#     permission_classes = [permissions.IsAuthenticated]
-#
-#
-# class UpdateView(generics.UpdateAPIView):
-#     queryset = Book.objects.all()
-#     serializer_class = BookSerializer
-#     lookup_field = 'id'
-#     permission_classes = [permissions.IsAuthenticated]
-#
-#
-# class DeleteView(generics.DestroyAPIView):
-#     queryset = Book.objects.all()
-#     serializer_class = BookSerializer
-#     lookup_field = 'id'
-#     permission_classes = [permissions.IsAdminUser]
-#
-
 """
 Integrate Django REST Framework’s filtering capabilities to allow users to filter the book list 
 by various attributes like title, author, and publication_year.
 Use DRF’s DjangoFilterBackend or similar tools to set up comprehensive filtering options in your ListView.
 """
 
-from rest_framework import filters
-from django_filters import rest_framework
+
 class ListView(generics.ListCreateAPIView):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
