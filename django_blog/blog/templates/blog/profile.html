@@ -1,0 +1,36 @@
+{% extends 'blog/base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Sign Up {% endblock %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ user_form.non_field_errors }}
+<!--  <div>-->
+<!--    {{ user_form.first_name.label_tag }} {{ user_form.first_name }}-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    {{ user_form.last_name.label_tag }} {{ user_form.last_name }}-->
+<!--  </div>-->
+  <div>
+    {{ register_form.email.label_tag }} {{ register_form.email }}
+  </div>
+
+    {{ profile_form.non_field_errors }}
+  <div>
+    {{ profile_form.bio.label_tag }} {{ profile_form.bio }}
+  </div>
+  <div>
+    {{ profile_form.avatar.label_tag }} {{ profile_form.avatar }}
+    {% if request.user.profile.avatar %}
+      <img src="{{ request.user.profile.avatar.url }}" alt="avatar" style="max-width:120px;">
+    {% endif %}
+  </div>
+
+  <button type="submit">Save</button>
+</form>
+
+{% endblock %}
