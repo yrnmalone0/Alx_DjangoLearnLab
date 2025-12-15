@@ -23,6 +23,4 @@ from django.conf import settings
 urlpatterns = ([
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
-    # automatically handle login, logout, etc
-    path('', include('django.contrib.auth.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

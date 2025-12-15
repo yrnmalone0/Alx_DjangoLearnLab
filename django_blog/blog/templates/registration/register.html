@@ -2,14 +2,14 @@
 
 {% load crispy_forms_tags %}
 
-{% block title %} Sign Up {% endblock %}
+{% block title %} Django Blog | Sign Up {% endblock %}
 
 {% block content %}
 
 <form method="post">
     {% csrf_token %}
-    {{ form|crispy }}
-    <p>Already have an account? <a href="/login">here</a></p>
+    {{ registerform|crispy }}
+    <p>Already have an account? <a href="/user-login">here</a></p>
     <button type="submit" class="btn btn-success">Register</button>
 </form>
 
