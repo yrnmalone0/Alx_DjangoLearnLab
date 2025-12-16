@@ -99,12 +99,12 @@ def profile(request):
 
 
 # - Create Post View
-class CreatePostView(LoginRequiredMixin, CreateView):
+class CreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/create_post.html'
      # Define the success URL after successful update
-    success_url = reverse_lazy('dashboard') 
+    success_url = reverse_lazy('posts') 
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -112,7 +112,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     
 
 # - List Posts View
-class PostListView(LoginRequiredMixin, ListView):
+class ListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'blog/post_list.html'
     context_object_name = 'posts'
