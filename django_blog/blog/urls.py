@@ -1,6 +1,7 @@
 from django.urls import path
 
 from . import views
+from .views import CreatePostView, PostListView
 
 urlpatterns = [
     path('', views.homepage, name=""),
@@ -9,4 +10,6 @@ urlpatterns = [
     path('user-logout', views.user_logout, name="user-logout"),
     path('dashboard', views.dashboard, name="dashboard"),
     path('profile', views.profile, name="profile"),
+    path('posts/new/', CreatePostView.as_view(), name="create-post"),
+    path('posts/', PostListView.as_view(), name="posts"),
 ]
