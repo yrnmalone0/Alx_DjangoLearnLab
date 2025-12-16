@@ -132,3 +132,10 @@ class UpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'blog/update_post.html'
      # Define the success URL after successful update
     success_url = reverse_lazy('posts')
+
+
+# - Delete Post View
+class DeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'blog/delete_post.html'
+    success_url = reverse_lazy('posts')
