@@ -8,7 +8,7 @@ from django.contrib.auth import authenticate, login, logout
 
 from .models import Post
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
@@ -118,3 +118,17 @@ class ListView(LoginRequiredMixin, ListView):
     context_object_name = 'posts'
 
 
+# - Detail Post View
+class DetailView(LoginRequiredMixin, DetailView):
+    model = Post
+    template_name = 'blog/post_detail.html'
+    context_object_name = 'post'
+
+
+# - Update Post View    
+class UpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'blog/update_post.html'
+     # Define the success URL after successful update
+    success_url = reverse_lazy('posts')

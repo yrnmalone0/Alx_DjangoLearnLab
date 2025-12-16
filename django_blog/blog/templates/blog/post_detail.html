@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} Django Blog | Post Detail {% endblock %}
+
+{% block content %}
+
+<h2 class="mb-4">{{ post.title }}</h2>
+<p>{{ post.content }}</p>
+<small>By {{ post.author.username }} on {{ post.published_date|date:"F j, Y, g:i a" }}</small>
+
+{% endblock %}
+
