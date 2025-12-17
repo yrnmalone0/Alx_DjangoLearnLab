@@ -102,7 +102,7 @@ def profile(request):
 class CreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
-    template_name = 'blog/create_post.html'
+    template_name = 'blog/creating_post.html'
      # Define the success URL after successful update
     success_url = reverse_lazy('posts') 
 
@@ -114,7 +114,7 @@ class CreateView(LoginRequiredMixin, CreateView):
 # - List Posts View
 class ListView(LoginRequiredMixin, ListView):
     model = Post
-    template_name = 'blog/post_list.html'
+    template_name = 'blog/listing_post.html'
     context_object_name = 'posts'
 
 
@@ -129,7 +129,7 @@ class DetailView(LoginRequiredMixin, DetailView):
 class UpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     form_class = PostForm
-    template_name = 'blog/update_post.html'
+    template_name = 'blog/editing_post.html'
      # Define the success URL after successful update
     success_url = reverse_lazy('posts')
 
@@ -137,5 +137,5 @@ class UpdateView(LoginRequiredMixin, UpdateView):
 # - Delete Post View
 class DeleteView(LoginRequiredMixin, DeleteView):
     model = Post
-    template_name = 'blog/delete_post.html'
+    template_name = 'blog/post_delete.html'
     success_url = reverse_lazy('posts')

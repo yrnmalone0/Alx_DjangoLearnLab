@@ -20,8 +20,15 @@
                     <li class="nav-item"><a class="nav-link text-white" href="/create_blog">Blog Posts</a></li>
                 </ul>
                 <ul class="navbar-nav">
+                    {% if user.is_authenticated %}
+                    <span style="color: white; margin-top: 9px;">
+                        {{ user.username }}
+                    </span>
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'user-logout' %}">Logout</a></li>
+                    {% else %}
                     <li class="nav-item"><a class="nav-link text-white" href="{% url 'user-login' %}">Login</a></li>
                     <li class="nav-item"><a class="nav-link text-white" href="{% url 'register' %}">Register</a></li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -30,7 +37,8 @@
     <div class="container mt-4">
         {% block content %}
         <!-- Page-specific content goes here -->
-        <h1>Welcome, User</h1>
+        <h1>You're here!</h1>
+        <p>Register or login to access your dashboard.</p>
         {% endblock %}
     </div>
 
