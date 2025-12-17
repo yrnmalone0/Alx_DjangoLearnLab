@@ -9,7 +9,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Post
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 
 
@@ -126,7 +126,7 @@ class DetailView(LoginRequiredMixin, DetailView):
 
 
 # - Update Post View    
-class UpdateView(LoginRequiredMixin, UpdateView):
+class UpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/editing_post.html'
@@ -135,7 +135,7 @@ class UpdateView(LoginRequiredMixin, UpdateView):
 
 
 # - Delete Post View
-class DeleteView(LoginRequiredMixin, DeleteView):
+class DeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
     success_url = reverse_lazy('posts')
