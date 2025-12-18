@@ -176,7 +176,7 @@ class CommentCreateView(LoginRequiredMixin,CreateView):
     
 
 # Edit Comment View
-class EditCommentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
     form_class = CommentForm
     template_name = 'blog/edit_comment.html'
@@ -198,7 +198,7 @@ class CommentListView(LoginRequiredMixin, ListView):
 
 
 # - Delete Comment View
-class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     template_name = 'blog/comment_delete.html'
     success_url = reverse_lazy('posts')
