@@ -1,7 +1,7 @@
 from django.urls import path
 
 from . import views
-from .views import CreateView, ListView, DetailView, UpdateView, DeleteView
+from .views import PostCreateView, PostListView, PostDetailView, PostUpdateView, PostDeleteView, CommentCreateView, CommentListView, EditCommentView, DeleteCommentView
 
 urlpatterns = [
     path('', views.homepage, name=""),
@@ -10,9 +10,13 @@ urlpatterns = [
     path('user-logout', views.user_logout, name="user-logout"),
     path('dashboard', views.dashboard, name="dashboard"),
     path('profile', views.profile, name="profile"),
-    path('post/new/', CreateView.as_view(), name="create-post"),
-    path('posts/', ListView.as_view(), name="posts"),
-    path('post/<int:pk>/', DetailView.as_view(), name="post-detail"),
-    path('post/<int:pk>/update/', UpdateView.as_view(), name="update-post"),
-    path('post/<int:pk>/delete/', DeleteView.as_view(), name="delete-post"),
+    path('post/new/', PostCreateView.as_view(), name="create-post"),
+    path('posts/', PostListView.as_view(), name="posts"),
+    path('post/<int:pk>/', PostDetailView.as_view(), name="post-detail"),
+    path('post/<int:pk>/update/', PostUpdateView.as_view(), name="update-post"),
+    path('post/<int:pk>/delete/', PostDeleteView.as_view(), name="delete-post"),
+    path('post/<int:post_id>/comments/new', CommentCreateView.as_view(), name="comment"),
+    path('post/<int:post_id>/comments/', CommentListView.as_view(), name="comments"),
+    path('post/<int:pk>/comments/edit/', EditCommentView.as_view(), name="edit-comment"),
+    path('post/<int:pk>/comments/delete/', DeleteCommentView.as_view(), name="delete-comment"),
 ]

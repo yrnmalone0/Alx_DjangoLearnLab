@@ -4,18 +4,40 @@
 {% block content %}
 <h2 class="mb-4">Blog Posts</h2>
 
+<a href="{% url 'create-post' %}" class="btn btn-primary mb-4">Create New Post</a>
+
 {% if posts %}
-    <div class="list-group">
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Content</th>
+            <th scope="col">Author</th>
+            <th scope="col">Published Date</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
         {% for post in posts %}
-            <a href="#" class="list-group-item list-group-item-action mb-2">
-                <h5 class="mb-1">{{ post.title }}</h5>
-                <p class="mb-1">{{ post.content|truncatewords:20 }}</p>
-                <small>By {{ post.author.username }} on {{ post.published_date|date:"F j, Y, g:i a" }}</small>
-            </a>
+        <tr>
+            <td>{{ post.title }}</td>
+            <td>{{ post.content|truncatewords:10 }}</td>
+            <td>{{ post.author.username }}</td>
+            <td>{{ post.published_date|date:"F j, Y, g:i a" }}</td>
+            <td>
+                <a href="{% url 'post-detail' post.pk %}" class="btn btn-info btn-sm">View</a>
+                <a href="{% url 'update-post' post.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                <a href="{% url 'delete-post' post.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                <a href="{% url 'comment' post.id %}" class="btn btn-secondary btn-sm">Comment</a>
+            </td>
+        </tr>
+    </tbody>
         {% endfor %}
-    </div>
+</table>
 {% else %}
     <p>No posts available.</p>
 {% endif %}
+
+
 
 {% endblock %}

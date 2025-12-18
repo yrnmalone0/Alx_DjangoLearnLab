@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
-from .forms import CreateUserForm, LoginForm, ProfileForm, PostForm
+from .forms import CreateUserForm, LoginForm, ProfileForm, PostForm, CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 # Authentication imports
 from django.contrib.auth import authenticate, login, logout
 
-from .models import Post
+from .models import Post, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -99,7 +99,7 @@ def profile(request):
 
 
 # - Create Post View
-class CreateView(LoginRequiredMixin, CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/creating_post.html'
@@ -112,30 +112,103 @@ class CreateView(LoginRequiredMixin, CreateView):
     
 
 # - List Posts View
-class ListView(LoginRequiredMixin, ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'blog/listing_post.html'
     context_object_name = 'posts'
 
 
 # - Detail Post View
-class DetailView(LoginRequiredMixin, DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView):
     model = Post
-    template_name = 'blog/post_detail.html'
+    template_name = 'blog/viewing_post.html'
     context_object_name = 'post'
 
 
 # - Update Post View    
-class UpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     form_class = PostForm
     template_name = 'blog/editing_post.html'
      # Define the success URL after successful update
     success_url = reverse_lazy('posts')
 
+    
+    def test_func(self):
+        """
+        This function checks whether the logged-in user is the author of the post.
+        """
+        post = self.get_object()
+        return self.request.user == post.author
+
 
 # - Delete Post View
-class DeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'blog/post_delete.html'
     success_url = reverse_lazy('posts')
+
+    
+    def test_func(self):
+        """
+        This function checks whether the logged-in user is the author of the post.
+        """
+        post = self.get_object()
+        return self.request.user == post.author
+    
+
+
+
+
+# - Comment View
+class CommentCreateView(LoginRequiredMixin,CreateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/comment.html'
+    success_url = reverse_lazy('posts')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        post_id = self.kwargs['post_id']
+        post = Post.objects.get(pk=post_id)
+        form.instance.post = post
+        return super().form_valid(form)
+    
+
+# Edit Comment View
+class EditCommentView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    form_class = CommentForm
+    template_name = 'blog/edit_comment.html'
+    success_url = reverse_lazy('posts')
+    
+    def test_func(self):
+        """
+        This function checks whether the logged-in user is the author of the comment.
+        """
+        comment = self.get_object()
+        return self.request.user == comment.author
+    
+# List Comments View
+class CommentListView(LoginRequiredMixin, ListView):
+    model = Comment
+    template_name = 'blog/listing_comments.html'
+    context_object_name = 'comments'
+
+
+
+# - Delete Comment View
+class DeleteCommentView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    template_name = 'blog/comment_delete.html'
+    success_url = reverse_lazy('posts')
+
+    
+    def test_func(self):
+        """
+        This function checks whether the logged-in user is the author of the comment.
+        """
+        comment = self.get_object()
+        return self.request.user == comment.author
+    
+

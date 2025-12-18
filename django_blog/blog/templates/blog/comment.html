@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} Django Blog | Comment {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    <h3 class="text-center mb-4">Add a Comment</h3>
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <button type="submit" class="btn btn-primary">Submit Comment</button>
+    </form>
+
+{% endblock %}
+

@@ -8,5 +8,16 @@
 <p>{{ post.content }}</p>
 <small>By {{ post.author.username }} on {{ post.published_date|date:"F j, Y, g:i a" }}</small>
 
+
+<h5 class="mt-5">Comments</h5>
+<ul>
+    {% for my_comment in comment %}
+      <li>
+        <strong>{{ comment.author.username }}:</strong> {{ comment.content }} <em>on {{ comment.created_at }}</em>
+      </li>
+    {% empty %}
+      <li>No comments available.</li>
+    {% endfor %}
+</ul>
 {% endblock %}
 

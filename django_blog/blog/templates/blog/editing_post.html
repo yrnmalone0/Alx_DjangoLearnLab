@@ -1,13 +1,18 @@
 {% extends 'blog/base.html' %}
 
-# Update blog pooost template
+# Update blog post template
 {% block title %} Django Blog | Update Post {% endblock %}
 
 {% block content %}
-<h2 class="mb-4">Update Post</h2>
+
+{% load crispy_forms_tags %}
+
+<h4 class="text-center mb-4">Update Post</h4>
+
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form|crispy }}
+
     <button type="submit" class="btn btn-primary">Update Post</button>
 </form>
 {% endblock %}
