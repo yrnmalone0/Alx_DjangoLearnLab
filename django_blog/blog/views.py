@@ -13,6 +13,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 
 from taggit.models import Tag
+from django.db.models import Q
 
 
 
@@ -220,3 +221,19 @@ def posts_by_tag(request, tag_slug):
     posts = tag.posts.all()  # This gets all posts related to the tag
 
     return render(request, 'blog/posts_by_tag.html', {'posts': posts, 'tag': tag})
+
+
+# - Search Posts View
+def search_posts(request):
+    query = request.GET.get('q', '')  # Get the search query from the URL parameter
+    if query:
+        # Perform a case-insensitive search on title, content, and tags
+        posts = Post.objects.filter(
+            Q(title__icontains=query) |  # Search for query in the title
+            Q(content__icontains=query) |  # Search for query in the content
+            Q(tags__name__icontains=query)  # Search for query in the tags
+        ).distinct()  # Ensures no duplicate posts are returned if they match multiple tags
+    else:
+        posts = Post.objects.all()  # If no query, return all posts
+
+    return render(request, 'blog/search_results.html', {'posts': posts, 'query': query})

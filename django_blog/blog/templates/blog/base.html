@@ -36,8 +36,14 @@
 
     <div class="container mt-4">
         {% block content %}
+
+        <form method="get" action="{% url 'search-posts' %}">
+            <input type="text" name="q" placeholder="Search..." value="{{ request.GET.q }}">
+            <button type="submit">Search</button>
+        </form>
+
         <!-- Page-specific content goes here -->
-        <h1>You're here!</h1>
+        <h1 class="mb-4 mt-5">You're here!</h1>
         <p>Register or login to access your dashboard.</p>
         {% endblock %}
     </div>
