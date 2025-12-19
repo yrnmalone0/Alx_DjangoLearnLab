@@ -10,9 +10,9 @@
 
 
 <!-- Tags Display -->
-<p><strong>Tags:</strong>
+<p class="mt-5"><strong>Tags:</strong>
     {% for tag in post.tags.all %}
-        <a href="{% url 'tagged-posts' tag.slug %}">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
+        <a href="#">{{ tag.name }}</a>{% if not forloop.last %}, {% endif %}
     {% endfor %}
 </p>
 
