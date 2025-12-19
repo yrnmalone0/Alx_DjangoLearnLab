@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .models import Profile, Post, Comment
 
 from django.forms.widgets import PasswordInput, TextInput
+from taggit.forms import TagField
 
 
 
@@ -30,9 +31,11 @@ class ProfileForm(forms.ModelForm):
 
 # - Post Creation Form (ModelForm)
 class PostForm(forms.ModelForm):
+    tags = TagField(required=False)
+
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'tags']
 
 
 

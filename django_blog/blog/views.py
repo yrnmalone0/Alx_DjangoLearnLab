@@ -12,6 +12,8 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 
+from taggit.models import Tag
+
 
 
 def homepage(request):
@@ -212,3 +214,9 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == comment.author
     
 
+# - Posts by Tag View
+def posts_by_tag(request, tag_slug):
+    tag = Tag.objects.get(slug=tag_slug)
+    posts = tag.posts.all()  # This gets all posts related to the tag
+
+    return render(request, 'blog/posts_by_tag.html', {'posts': posts, 'tag': tag})
